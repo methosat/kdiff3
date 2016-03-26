@@ -247,8 +247,10 @@ SectionIn RO
     File "COPYING.txt"
     File "Readme_Win.txt"
     File "ChangeLog.txt"
-    SetOutPath "$INSTDIR\bin"
+    ;SetOutPath "$INSTDIR\bin"
     File /r "${BITS}bit\bin\*.*"
+    SetOutPath "$INSTDIR\platforms"
+    File /r "${BITS}bit\platforms\*.*"
     SetOutPath "$INSTDIR"
     Delete "$INSTDIR\kdiff3-QT4.exe"
   
@@ -384,13 +386,13 @@ Section /o "SVN Merge tool" SecIntegrationSubversionDiff3Cmd
 SectionEnd
 
 
-Section /o "ClearCase" SecIntegrationClearCase
-  DetailPrint "Integrate with Rational ClearCase from IBM"
-  ccInstallHelper::nsisPlugin "install" "$INSTDIR\kdiff3.exe"
+;Section /o "ClearCase" SecIntegrationClearCase
+;  DetailPrint "Integrate with Rational ClearCase from IBM"
+;  ccInstallHelper::nsisPlugin "install" "$INSTDIR\kdiff3.exe"
 
   ;File "ccInstHelper.exe"
   ;ExecWait '"$INSTDIR\ccInstHelper.exe" install "$INSTDIR\kdiff3.exe"'
-SectionEnd
+;SectionEnd
 
 SubSectionEnd
 
@@ -514,7 +516,7 @@ ${EndIf}
   DeleteRegValue SHCTX "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "$DIFF_EXT_CLSID"
 
   ; clearcase
-  ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"
+  ;ccInstallHelper::nsisPlugin "uninstall" "$INSTDIR\kdiff3.exe"
   ;ExecWait '"$INSTDIR\ccInstHelper.exe" uninstall "$INSTDIR\kdiff3.exe"'
   ;Delete "$INSTDIR\ccInstHelper.exe"
 

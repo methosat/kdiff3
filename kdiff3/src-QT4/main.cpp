@@ -114,6 +114,16 @@ public:
    }
 };
 
+bool fileExists(QString path) {
+    QFileInfo checkFile(path);
+    // check if file exists and if yes: Is it really a file and no directory?
+    if (checkFile.exists() && checkFile.isFile()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int main(int argc, char *argv[])
 {
 #ifdef _WIN32
@@ -258,6 +268,16 @@ int main(int argc, char *argv[])
       app.installTranslator( &qtTranslator );
    }
 #endif
+
+   QString stylesheetPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + "\\kdiff3stylesheet.qss";
+   if (::fileExists(stylesheetPath))
+   {
+       QFile file(stylesheetPath);
+       file.open(QFile::ReadOnly);
+       QString styleSheet = QLatin1String(file.readAll());
+
+       qApp->setStyleSheet(styleSheet);
+   }
 
 #ifndef QT_NO_SESSIONMANAGER
   if (app.isSessionRestored())

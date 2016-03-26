@@ -131,4 +131,13 @@ public:
 QStringList safeStringSplit(const QString& s, char sepChar=',', char metaChar='\\' );
 QString safeStringJoin(const QStringList& sl, char sepChar=',', char metaChar='\\' );
 
+class KConfigGroup;
+
+class KDiffConfig
+{
+public:
+    static KConfigGroup* config;
+};
+
+
 #endif

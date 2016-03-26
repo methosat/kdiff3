@@ -269,6 +269,8 @@ int main(int argc, char *argv[])
    }
 #endif
 
+   KDiffConfig::config = app.config();
+
    QString stylesheetPath = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first() + "\\kdiff3stylesheet.qss";
    if (::fileExists(stylesheetPath))
    {

@@ -27,6 +27,7 @@
 #include <QStringList>
 #include <QTextStream>
 
+
 ValueMap::ValueMap()
 {
 }
@@ -347,3 +348,5 @@ QPoint      ValueMap::readEntry(const QString& s, const QPoint defaultVal ){ ret
 bool        ValueMap::readEntry (const QString& s, bool bDefault ){ return readBoolEntry(s,bDefault); }
 int         ValueMap::readEntry  (const QString& s, int iDefault ){ return readNumEntry(s,iDefault); }
 QStringList ValueMap::readEntry (const QString& s, const QStringList& defaultVal, char separator ){ return readListEntry(s,defaultVal,separator); }
+
+KConfigGroup* KDiffConfig::config = NULL;

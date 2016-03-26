@@ -3372,6 +3372,20 @@ void DirectoryMergeWindow::slotShowFilesOnlyInC()   { updateFileVisibilities(); 
 void DirectoryMergeWindow::slotSynchronizeDirectories()   {  }
 void DirectoryMergeWindow::slotChooseNewerFiles()   {  }
 
+static QKeySequence GetKeySequence(KAction* action, QKeySequence defaultSeq)
+{
+    QString name = action->text();
+    QString empty = QString("");
+    QString keys = KDiffConfig::config->readEntry(name, empty);
+    QKeySequence seq = defaultSeq;
+
+    if (keys != empty)
+    {
+        seq = KShortcut(keys);
+    }
+    return seq;
+}
+
 void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActionCollection* ac )
 {
 #include "xpm/startmerge.xpm"
@@ -3384,7 +3398,10 @@ void DirectoryMergeWindow::initDirectoryMergeActions( QObject* pKDiff3App, KActi
    d->m_pDirStartOperation = KDiff3::createAction< KAction >(i18n("Start/Continue Directory Merge"), KShortcut( Qt::Key_F7 ), p, SLOT(slotRunOperationForAllItems()), ac, "dir_start_operation");
    d->m_pDirRunOperationForCurrentItem = KDiff3::createAction< KAction >(i18n("Run Operation for Current Item"), KShortcut( Qt::Key_F6 ), p, SLOT(slotRunOperationForCurrentItem()), ac, "dir_run_operation_for_current_item");
    d->m_pDirCompareCurrent = KDiff3::createAction< KAction >(i18n("Compare Selected File"), p, SLOT(compareCurrentFile()), ac, "dir_compare_current");
+
    d->m_pDirMergeCurrent = KDiff3::createAction< KAction >(i18n("Merge Current File"), QIcon(QPixmap(startmerge)), i18n("Merge\nFile"), pKDiff3App, SLOT(slotMergeCurrentFile()), ac, "merge_current");
+   d->m_pDirMergeCurrent->setShortcut(GetKeySequence(d->m_pDirMergeCurrent, QKeySequence()));
+
    d->m_pDirFoldAll = KDiff3::createAction< KAction >(i18n("Fold All Subdirs"), p, SLOT(collapseAll()), ac, "dir_fold_all");
    d->m_pDirUnfoldAll = KDiff3::createAction< KAction >(i18n("Unfold All Subdirs"), p, SLOT(expandAll()), ac, "dir_unfold_all");
    d->m_pDirRescan = KDiff3::createAction< KAction >(i18n("Rescan"), KShortcut( Qt::SHIFT+Qt::Key_F5 ), p, SLOT(reload()), ac, "dir_rescan");

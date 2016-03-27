@@ -656,7 +656,7 @@ void KDiff3App::initActions( KActionCollection* ac )
    winToggleSplitOrientation = KDiff3::createAction< KAction >(i18n("Toggle Split Orientation"), this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
 
    dirShowBoth = KDiff3::createAction< KToggleAction >(i18n("Dir && Text Split Screen View"), this, SLOT(slotDirShowBoth()), ac, "win_dir_show_both");
-   dirShowBoth->setChecked( true );
+
    dirViewToggle = KDiff3::createAction< KAction >(i18n("Toggle Between Dir && Text View"), this, SLOT(slotDirViewToggle()), ac, "win_dir_view_toggle");
 
    m_pMergeEditorPopupMenu = new QMenu( this );

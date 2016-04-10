@@ -583,7 +583,7 @@ void KDiff3App::initActions( KActionCollection* ac )
 
    goNextConflict = KDiff3::createAction< KAction >(i18n("Go to Next Conflict"), QIcon(QPixmap(down2arrow)), i18n("Next\nConflict"), this, SLOT(slotGoNextConflict()), ac, "go_next_conflict");
    goNextConflict->setToolTip( goNextConflict->text() + omitsWhitespace );
-   goNextConflict->setShortcut(GetKeySequence(goNextConflict, KShortcut(Qt::Key_No)));
+   goNextConflict->setShortcut(GetKeySequence(goNextConflict, Qt::CTRL+Qt::Key_PageDown));
 
    goPrevUnsolvedConflict = KDiff3::createAction< KAction >(i18n("Go to Previous Unsolved Conflict"), QIcon(QPixmap(prevunsolved)), i18n("Prev\nUnsolved"), this, SLOT(slotGoPrevUnsolvedConflict()), ac, "go_prev_unsolved_conflict");
    goPrevUnsolvedConflict->setToolTip( goPrevUnsolvedConflict->text() + includeWhitespace );
@@ -656,8 +656,11 @@ void KDiff3App::initActions( KActionCollection* ac )
    winToggleSplitOrientation = KDiff3::createAction< KAction >(i18n("Toggle Split Orientation"), this, SLOT(slotWinToggleSplitterOrientation()), ac, "win_toggle_split_orientation");
 
    dirShowBoth = KDiff3::createAction< KToggleAction >(i18n("Dir && Text Split Screen View"), this, SLOT(slotDirShowBoth()), ac, "win_dir_show_both");
+   dirShowBoth->setChecked( true );
+   dirShowBoth->setShortcut(GetKeySequence(dirShowBoth, KShortcut()));
 
    dirViewToggle = KDiff3::createAction< KAction >(i18n("Toggle Between Dir && Text View"), this, SLOT(slotDirViewToggle()), ac, "win_dir_view_toggle");
+   dirViewToggle->setShortcut(GetKeySequence(dirViewToggle, KShortcut()));
 
    m_pMergeEditorPopupMenu = new QMenu( this );
 /*   chooseA->plug( m_pMergeEditorPopupMenu );

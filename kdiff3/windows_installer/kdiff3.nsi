@@ -251,6 +251,14 @@ SectionIn RO
     File /r "${BITS}bit\bin\*.*"
     SetOutPath "$INSTDIR\platforms"
     File /r "${BITS}bit\platforms\*.*"
+
+	IfFileExists "$PROFILE\kdiff3stylesheet.qss" 0 file_not_found
+	goto end_of_found ;
+	file_not_found:
+	SetOutPath "$PROFILE"
+	File "kdiff3stylesheet.qss"
+	end_of_found:
+
     SetOutPath "$INSTDIR"
     Delete "$INSTDIR\kdiff3-QT4.exe"
   
